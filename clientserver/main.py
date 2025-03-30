@@ -12,7 +12,7 @@ KEYCLOAK_URL = "http://keycloak:8080"  # Docker内部通信用
 BROWSER_KEYCLOAK_URL = "http://localhost/auth"  # ブラウザリダイレクト用
 REALM_NAME = "myrealm"
 CLIENT_ID = "myclient"
-CLIENT_SECRET = "nTvzesUGTaDEIGfw7drdAyGnwa5KPbNF"  # 実際の環境ではこれは安全に保管する必要があります
+CLIENT_SECRET = "nTvzesUGTaDEIGfw7drdAyGnwa5KPbNF"
 REDIRECT_URI = "http://localhost/callback"
 
 @app.route('/')
