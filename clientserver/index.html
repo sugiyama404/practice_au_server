@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>認証サーバー練習</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Keycloak認証サーバーテスト</h1>
+        <!-- ログインしている場合 -->
+        <div id="logged-in" style="display: none;">
+            <p>ログイン中のユーザー: <strong id="username">Unknown</strong></p>
+            <p>ユーザー情報:</p>
+            <pre id="user-info"></pre>
+            <a href="/logout" class="button">ログアウト</a>
+        </div>
+
+        <!-- ログインしていない場合 -->
+        <div id="logged-out">
+            <p>認証サーバーによるログイン機能のテストアプリケーションです。</p>
+            <a href="/login" class="button">ログイン</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // サーバーからユーザー情報を取得
+            fetch('/user-info')
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('ログインしていません');
+                })
+                .then(user => {
+                    // ユーザーがログインしている場合
+                    document.getElementById('logged-in').style.display = 'block';
+                    document.getElementById('logged-out').style.display = 'none';
+                    document.getElementById('username').textContent = user.preferred_username || 'Unknown';
+                    document.getElementById('user-info').textContent = JSON.stringify(user, null, 2);
+                })
+                .catch(error => {
+                    // ユーザーがログインしていない場合
+                    document.getElementById('logged-in').style.display = 'none';
+                    document.getElementById('logged-out').style.display = 'block';
+                });
+        });
+    </script>
+</body>
+
+</html>
