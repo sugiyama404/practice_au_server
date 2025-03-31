@@ -1,4 +1,4 @@
-# Keycloak 認証システムとシングルサインオン環境を Docker Compose で構築
+# Keycloak を活用した認証基盤構築とシングルサインオン環境の実現
 
 <p align="center">
   <img src="source/service.png" alt="animated" width="400">
